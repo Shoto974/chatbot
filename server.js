@@ -9,6 +9,8 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.listen(3300, () => console.log(`Server running on port 3300`));
+app.listen(process.env.PORT, () =>
+  console.log(`Server running on port ${process.env.PORT}`)
+);
 
 module.exports = app;
