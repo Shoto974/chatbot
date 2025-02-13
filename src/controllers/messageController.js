@@ -6,6 +6,7 @@ exports.getConversationMessages = async (req, res) => {
     if (!idRoom) {
       return res.status(400).json({ msg: "Id room is required" });
     }
+    return res.status(200).send(idRoom);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
