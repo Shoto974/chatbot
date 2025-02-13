@@ -1,10 +1,10 @@
-exports.botAsk = async (req, res) => {
+exports.botAsk = async (req, res, next) => {
   try {
     const { prompt, max_tokens } = req.body;
     if (!prompt || !max_tokens)
       return res.status(400).json({ msg: "All fields are required" });
 
-    const res = await fetch("http://172.27.74.25:8000/generate", {
+    const response = await fetch("http://172.27.74.25:8000/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,9 +14,13 @@ exports.botAsk = async (req, res) => {
         max_tokens,
       }),
     });
-    if (res) {
-      const data = await res.json();
-      return res.status(200).send(data);
+    if (response) {
+      const data = await response.json();
+      req.body = {
+        sender: { id: "123", username: "bot" },
+        content: data.response,
+      };
+      next();
     }
   } catch (err) {
     console.error(err.message);

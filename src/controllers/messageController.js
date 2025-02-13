@@ -22,6 +22,8 @@ exports.getConversationMessages = async (req, res) => {
 };
 
 exports.sendMessage = async (req, res) => {
+  console.log(req.body);
+
   try {
     const { sender, content } = req.body;
     const idRoom = req.params.idRoom;
