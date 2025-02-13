@@ -12,9 +12,11 @@ exports.isWorking = async (req, res) => {
 exports.getConversationMessages = async (req, res) => {
   try {
     const idRoom = req.params.idRoom;
+    console.log(idRoom);
     if (!idRoom) {
       return res.status(400).json({ msg: "Id room is required" });
     }
+    return res.status(200).json({});
   } catch (err) {
     console.error(err.message);
     res.status(500).send(err);

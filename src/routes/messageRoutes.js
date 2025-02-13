@@ -8,9 +8,9 @@ const {
 const router = express.Router();
 
 router.get("/", isWorking);
-router.get("/:IdRoom", getConversationMessages);
-router.post("/:IdRoom", sendMessage);
-router.delete("/:IdRoom", deleteMessage);
-router.post("/:IdRoom/:IdMessage/toggleLike" /* togglemessage */);
+router.get("/:idRoom", getConversationMessages);
+router.post("/:idRoom", sendMessage);
+router.delete("/:idRoom", deleteMessage);
+router.post("/:idRoom/:idMessage/toggleLike" /* togglemessage */);
 
 module.exports = router;
