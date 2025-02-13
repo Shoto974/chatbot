@@ -40,3 +40,20 @@ exports.loginUser = async (req, res) => {
     }
   } catch (error) {}
 };
+
+exports.getUserInfos = async (req, res) => {
+  const id = req.user.userId;
+
+  try {
+    if (!id) return res.status(401).json({ message: "Unauthorized" });
+
+    const user = await User.findOne({ id });
+
+    if (!user) return res.status(400).json({ message: "User does not exists" });
+
+    return res.status(200).json({ id: user._id, username: user.username });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: "Internal Error" });
+  }
+};

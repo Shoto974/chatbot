@@ -3,6 +3,7 @@ const userRoutes = require("./src/routes/userRoutes");
 const messageRoutes = require("./src/routes/messageRoutes");
 const { PORT } = require("./src/config/env");
 const connectionDB = require("./src/config/db");
+const expressWs = require("express-ws");
 const app = express();
 
 app.use(express.json());
