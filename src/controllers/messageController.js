@@ -1,15 +1,23 @@
 const Message = require("../models/Message");
 
+exports.isWorking = async (req, res) => {
+  try {
+    return res.status(200).json({ msg: "Connecté au serveur." });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err);
+  }
+};
+
 exports.getConversationMessages = async (req, res) => {
   try {
     const { idRoom } = req.params.idRoom;
     if (!idRoom) {
       return res.status(400).json({ msg: "Id room is required" });
     }
-    return res.status(200).send(idRoom);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send(error);
   }
 };
 
