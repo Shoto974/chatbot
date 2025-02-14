@@ -47,8 +47,8 @@ exports.getUserInfos = async (req, res) => {
 
   try {
     if (!id) return res.status(401).json({ message: "Unauthorized" });
-
-    const user = await User.findOne({ id });
+    console.log(id);
+    const user = await User.findOne({ _id: id }).select("-password");
 
     if (!user) return res.status(400).json({ message: "User does not exists" });
 
