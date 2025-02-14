@@ -32,7 +32,7 @@ exports.loginUser = async (req, res) => {
       if (isMatch) {
         //On créé le JWT
         const token = jwt.sign({ id: user._id }, secret, { expiresIn: "5h" });
-        res.status(200).json({ token });
+        res.status(200).json({ token: token });
       } else {
         res.status(401).json({ message: "Unauthorized : invalid" });
       }
