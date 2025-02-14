@@ -1,3 +1,4 @@
+const { sendToClients } = require("../config/wsManager");
 const Message = require("../models/Message");
 
 exports.isWorking = async (req, res) => {
@@ -37,6 +38,7 @@ exports.sendMessage = async (req, res) => {
 
     const message = new Message({ ...req.body, idRoom: idRoom });
     message.save();
+    sendToClients({ ...req.body, idRoom: idRoom });
     res.send("Message sent successfully");
   } catch (err) {
     console.error(err.message);
