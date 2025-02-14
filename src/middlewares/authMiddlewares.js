@@ -10,6 +10,6 @@ exports.authMiddlewares = (req, res, next) => {
 
   if (!decoded)
     res.status(400).json({ message: "le token ne correspond pas " });
-  req.user = { userId: decoded.userId, jwt: token };
+  req.user = { userId: decoded.userId, token };
   next();
 };
