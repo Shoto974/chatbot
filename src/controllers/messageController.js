@@ -16,7 +16,7 @@ exports.getConversationMessages = async (req, res) => {
     if (!idRoom) {
       return res.status(400).json({ msg: "Id room is required" });
     }
-    Message.find()
+    Message.find({ idRoom: idRoom })
       .then((messages) => res.status(200).json(messages))
       .catch((error) => res.status(400).json(error));
   } catch (err) {
