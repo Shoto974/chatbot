@@ -1,6 +1,7 @@
 const express = require("express");
 const userRoutes = require("./src/routes/userRoutes");
 const messageRoutes = require("./src/routes/messageRoutes");
+const roomRoutes = require("./src/routes/roomRoute");
 const { PORT } = require("./src/config/env");
 const connectionDB = require("./src/config/db");
 const expressWs = require("express-ws");
@@ -19,6 +20,7 @@ app.use(express.json());
 connectionDB();
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/rooms", roomRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
