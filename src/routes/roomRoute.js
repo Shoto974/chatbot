@@ -12,3 +12,5 @@ router.post("/createRoot", authMiddlewares, createRoom);
 router.delete("/deleteRoom", authMiddlewares, deleteRoom);
 router.put("/joinRoom", authMiddlewares, joinRoom);
 router.get("/getRooms", authMiddlewares, getRooms);
+
+module.exports = router;
