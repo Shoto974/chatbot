@@ -52,9 +52,36 @@ exports.getUserInfos = async (req, res) => {
 
     if (!user) return res.status(400).json({ message: "User does not exists" });
 
-    return res.status(200).json({ id: user._id, username: user.username });
+    return res
+      .status(200)
+      .json({ id: user._id, username: user.username, wallet: user.wallet });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Internal Error" });
+  }
+};
+
+exports.updateInWallet = async (req, res) => {
+  const id = req.user.userId;
+  const { amount } = req.body;
+
+  const user = await User.findOne({ _id: id }).select("-password");
+
+  if (!user) return res.status(400).json({ message: "User does not exists" });
+
+  const newAmount = user.wallet + amount;
+
+  if (newAmount < 0)
+    return res.status(400).json({ message: "Wallet needs to be positive" });
+
+  try {
+    let updatedUser = await User.updateOne(
+      { _id: id },
+      { wallet: user.wallet + amount }
+    );
+    return res.status(202).json({ data: { wallet: newAmount } });
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ message: "User's wallet can't be updated" });
   }
 };

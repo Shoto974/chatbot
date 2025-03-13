@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   getUserInfos,
+  updateInWallet,
 } = require("../controllers/userController");
 const { authMiddlewares } = require("../middlewares/authMiddlewares");
 const router = express.Router();
@@ -10,5 +11,6 @@ const router = express.Router();
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.get("/me", authMiddlewares, getUserInfos);
+router.post("/add-money", authMiddlewares, updateInWallet);
 
 module.exports = router;
