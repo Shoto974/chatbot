@@ -4,12 +4,14 @@ const NavalBattleRoom = require("../models/NavalBattleRoom");
 exports.createNavalBattleRoom = async (req, res) => {
   const { name, password, gamble } = req.body;
   const { userId } = req.user;
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+
+  let salt, hashedPassword;
+  if (password) {
+    salt = await bcrypt.genSalt(10);
+    hashedPassword = await bcrypt.hash(password, salt);
+  }
 
   try {
-    res.status(201).json({ message: "Room created" });
-
     let navalBattleRoom = new NavalBattleRoom({
       name,
       hashedPassword,
