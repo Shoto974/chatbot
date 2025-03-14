@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.get("/me", authMiddlewares, getUserInfos);
-router.post("/add-money", authMiddlewares, updateInWallet);
+router.post("/wallet/update", authMiddlewares, updateInWallet);
 
 module.exports = router;
