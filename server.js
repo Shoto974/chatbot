@@ -14,15 +14,8 @@ const https = require("https");
 
 app.use(cors());
 
-const server = https.createServer(
-  {
-    key: fs.readFileSync("./ssl/server-key.pem"),
-    cert: fs.readFileSync("./ssl/server-cert.pem"),
-  },
-  app
-);
 //Init serveur ws
-expressWs(app, server);
+expressWs(app);
 app.ws("/ws", (ws, req) => {
   addClient(ws);
 });
