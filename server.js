@@ -12,7 +12,14 @@ const cors = require("cors");
 const fs = require("fs");
 const https = require("https");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allow all origins (change this for production)
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Allow cookies and authentication headers
+  })
+);
 
 //Init serveur ws
 expressWs(app);
