@@ -2,6 +2,7 @@ const express = require("express");
 const userRoutes = require("./src/routes/userRoutes");
 const messageRoutes = require("./src/routes/messageRoutes");
 const roomRoutes = require("./src/routes/roomRoute");
+const navalBattleRoomRoutes = require("./src/routes/navalBattleRoomRoutes");
 const { PORT } = require("./src/config/env");
 const connectionDB = require("./src/config/db");
 const expressWs = require("express-ws");
@@ -21,6 +22,7 @@ connectionDB();
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/rooms", roomRoutes);
+app.use("/api/navalBattle", navalBattleRoomRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
