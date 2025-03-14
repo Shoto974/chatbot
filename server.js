@@ -9,11 +9,20 @@ const expressWs = require("express-ws");
 const { addClient } = require("./src/config/wsManager");
 const app = express();
 const cors = require("cors");
+const fs = require("fs");
+const https = require("https");
 
 app.use(cors());
 
+const server = https.createServer(
+  {
+    key: fs.readFileSync("./ssl/server-key.pem"),
+    cert: fs.readFileSync("./ssl/server-cert.pem"),
+  },
+  app
+);
 //Init serveur ws
-expressWs(app);
+expressWs(app, server);
 app.ws("/ws", (ws, req) => {
   addClient(ws);
 });
